@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import PropTypes from 'prop-types';
 
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 
@@ -12,4 +13,8 @@ export const ImageGallery = ({ data = [], toggleModal }) => {
       })}
     </ul>
   );
+};
+ImageGallery.propTypes = {
+  data: PropTypes.object,
+  toggleModal: PropTypes.node,
 };

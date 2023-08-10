@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { ImSearch } from 'react-icons/im';
+import PropTypes from 'prop-types';
 
 import style from './SearchBar.module.css';
 const INITIAL_STATE = {
@@ -19,7 +20,7 @@ class SearchBar extends Component {
       return;
     }
     this.props.onSearch(this.state.query);
-    // this.setState({ query: '' });
+
     this.reset();
   };
   reset = () => {
@@ -49,4 +50,7 @@ class SearchBar extends Component {
   }
 }
 
+SearchBar.propTypes = {
+  query: PropTypes.string,
+};
 export default SearchBar;

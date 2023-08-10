@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { fetchImg } from 'service/api';
+import PropTypes from 'prop-types';
 import Button from './Button/Button';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import SearchBar from './SearchBar/SearchBar';
@@ -22,26 +23,52 @@ export class App extends Component {
   };
 
   handleSearch = query => {
-    this.setState({ query, per_page: 12 });
+    this.setState({ query, page: 1 });
   };
-  componentDidMount() {}
+
   async componentDidUpdate(_, prevState) {
     const { query, page, per_page } = this.state;
-    if (prevState.query !== query || prevState.per_page !== per_page) {
+
+    if (prevState.page !== page) {
       try {
         this.setState({ loading: true });
         const { data, totalHits } = await fetchImg(query, { page, per_page });
-        this.setState({ images: data, totalHits });
+        console.log(data);
+        data.length !== 0
+          ? this.setState(prev => ({
+              totalHits,
+              images: [...prev.images, ...data],
+            }))
+          : this.setState({
+              totalHits,
+              images: data,
+            });
+      } catch (error) {
+      } finally {
+        this.setState({ loading: false });
+      }
+    }
+    if (prevState.query !== query) {
+      try {
+        this.setState({ loading: true });
+        const { data, totalHits } = await fetchImg(query, { page, per_page });
+
+        this.setState({
+          totalHits,
+          images: data,
+        });
       } catch (error) {
       } finally {
         this.setState({ loading: false });
       }
     }
   }
+
   handlePageLoad = () => {
     this.setState(prev => ({
-      per_page: prev.per_page + prev.step,
+      page: prev.page + 1,
     }));
+    console.log('page', this.state.page);
   };
   toggleModal = url => {
     this.setState(prev => ({
@@ -89,3 +116,15 @@ export class App extends Component {
     );
   }
 }
+App.propTypes = {
+  error: PropTypes.string,
+  images: PropTypes.array,
+  page: PropTypes.number,
+  step: PropTypes.number,
+  per_page: PropTypes.number,
+  loading: PropTypes.bool,
+  query: PropTypes.string,
+  totalHits: PropTypes.number,
+  isModalOpen: PropTypes.bool,
+  largeImg: PropTypes.number,
+};

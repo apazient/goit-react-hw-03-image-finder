@@ -1,4 +1,6 @@
 import style from './ImageGalleryItem.module.css';
+import PropTypes from 'prop-types';
+
 export const ImageGalleryItem = ({ id, largeImg, url, alt, onClick }) => {
   return (
     <li key={id} className={style.ImageGalleryItem}>
@@ -10,4 +12,12 @@ export const ImageGalleryItem = ({ id, largeImg, url, alt, onClick }) => {
       />
     </li>
   );
+};
+ImageGalleryItem.propTypes = {
+  id: PropTypes.node,
+
+  largeImg: PropTypes.string,
+  url: PropTypes.string,
+  alt: PropTypes.string,
+  onClick: PropTypes.node,
 };

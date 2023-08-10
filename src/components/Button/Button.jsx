@@ -1,4 +1,5 @@
 import style from './Button.module.css';
+import PropTypes from 'prop-types';
 
 const Button = ({ clickMore, children }) => {
   return (
@@ -8,4 +9,10 @@ const Button = ({ clickMore, children }) => {
     </button>
   );
 };
+
+Button.propTypes = {
+  children: PropTypes.node,
+  clickMore: PropTypes.node,
+};
+
 export default Button;
