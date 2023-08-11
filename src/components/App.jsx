@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { fetchImg } from 'service/api';
-import PropTypes from 'prop-types';
+
 import Button from './Button/Button';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import SearchBar from './SearchBar/SearchBar';
@@ -103,15 +103,4 @@ export class App extends Component {
     );
   }
 }
-App.propTypes = {
-  error: PropTypes.string,
-  images: PropTypes.array,
-  page: PropTypes.number,
-  step: PropTypes.number,
-  per_page: PropTypes.number,
-  loading: PropTypes.bool,
-  query: PropTypes.string,
-  totalHits: PropTypes.number,
-  isModalOpen: PropTypes.bool,
-  largeImg: PropTypes.number,
-};
+
