@@ -28,35 +28,22 @@ export class App extends Component {
 
   async componentDidUpdate(_, prevState) {
     const { query, page, per_page } = this.state;
+    const neuQuery = prevState.query !== query;
 
-    if (prevState.page !== page) {
+    if (prevState.page !== page || neuQuery) {
       try {
         this.setState({ loading: true });
         const { data, totalHits } = await fetchImg(query, { page, per_page });
-        console.log(data);
-        data.length !== 0
-          ? this.setState(prev => ({
-              totalHits,
-              images: [...prev.images, ...data],
-            }))
-          : this.setState({
+
+        neuQuery
+          ? this.setState({
               totalHits,
               images: data,
-            });
-      } catch (error) {
-      } finally {
-        this.setState({ loading: false });
-      }
-    }
-    if (prevState.query !== query) {
-      try {
-        this.setState({ loading: true });
-        const { data, totalHits } = await fetchImg(query, { page, per_page });
-
-        this.setState({
-          totalHits,
-          images: data,
-        });
+            })
+          : this.setState(prev => ({
+              totalHits,
+              images: [...prev.images, ...data],
+            }));
       } catch (error) {
       } finally {
         this.setState({ loading: false });

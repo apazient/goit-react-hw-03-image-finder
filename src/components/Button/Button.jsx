@@ -12,7 +12,7 @@ const Button = ({ clickMore, children }) => {
 
 Button.propTypes = {
   children: PropTypes.node,
-  clickMore: PropTypes.node,
+  clickMore: PropTypes.func,
 };
 
 export default Button;

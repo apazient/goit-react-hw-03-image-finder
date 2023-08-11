@@ -14,10 +14,10 @@ export const ImageGalleryItem = ({ id, largeImg, url, alt, onClick }) => {
   );
 };
 ImageGalleryItem.propTypes = {
-  id: PropTypes.node,
+  id: PropTypes.number,
 
   largeImg: PropTypes.string,
   url: PropTypes.string,
   alt: PropTypes.string,
-  onClick: PropTypes.node,
+  onClick: PropTypes.func,
 };

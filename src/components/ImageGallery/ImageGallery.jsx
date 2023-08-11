@@ -15,6 +15,6 @@ export const ImageGallery = ({ data = [], toggleModal }) => {
   );
 };
 ImageGallery.propTypes = {
-  data: PropTypes.object,
-  toggleModal: PropTypes.node,
+  data: PropTypes.array,
+  toggleModal: PropTypes.func,
 };
